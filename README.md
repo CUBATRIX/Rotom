@@ -14,6 +14,11 @@ Este projeto consiste no desenvolvimento de um **robô sumô controlado remotame
 
 ---
 
+## 👥 Equipe
+- Eletrônica: Davi
+- Programação: Alisson
+- Design mecânico: Rafael
+
 ## 🖼️ Imagens do projeto
 
 ### 🔧 documentação atualizada
@@ -71,6 +76,12 @@ O robô é controlado remotamente, permitindo:
 - Estudo do controle diferencial  
 
 ---
+
+## 📈 Futuras melhorias
+- Implementação de sensores de borda
+- Estratégias semi-autônomas
+- Otimização de velocidade e torque
+- Estrutura mais leve e resistente
 
 ## 🧩 Arquitetura do sistema
 
