@@ -14,9 +14,9 @@ Este projeto consiste no desenvolvimento de um **robô sumô controlado remotame
 ---
 
 ## 👥 Equipe
-- Eletrônica: Davi
-- Programação: Alisson
-- Design mecânico: Rafael
+- Eletrônica: Davi Matsumori
+- Programação: Alisson Lopes
+- Design mecânico: Rafael Xavier
 
 ## 🖼️ Imagens do projeto
 
