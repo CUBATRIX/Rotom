@@ -4,7 +4,6 @@
 ![ESP32](https://img.shields.io/badge/ESP32-WROOM--32-blue)
 ![Arduino](https://img.shields.io/badge/IDE-Arduino-00979D)
 ![Robótica](https://img.shields.io/badge/área-robótica-red)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
