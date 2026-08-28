@@ -12,8 +12,6 @@
 
 Este projeto consiste no desenvolvimento de um **robô sumô controlado remotamente**, voltado para competições de robótica.
 
-O robô utiliza uma arquitetura baseada em **controle diferencial (tank drive)**, permitindo movimentos ágeis, precisos e com alto torque, fundamentais para estratégias de combate em arena.
-
 ---
 
 ## 🖼️ Imagens do projeto
@@ -37,7 +35,8 @@ O robô utiliza uma arquitetura baseada em **controle diferencial (tank drive)**
 - Estrutura mecânica personalizada (chassi)  
 - Protoboard e jumpers  
 - Arduino IDE  
-- Comunicação sem fio via ESP32  
+- Comunicação sem fio via ESP32
+- controle de ps5
 
 ---
 
@@ -47,7 +46,7 @@ O robô é controlado remotamente, permitindo:
 
 - Controle independente dos dois motores
 - Movimentos:
-  - Frente / trás
+  - Frente / trás de motores 
   - Giro no próprio eixo
 - Alta responsividade para combate
 
