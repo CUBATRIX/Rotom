@@ -18,15 +18,14 @@ O robô utiliza uma arquitetura baseada em **controle diferencial (tank drive)**
 
 ## 🖼️ Imagens do projeto
 
+### 🔧 documentação atualizada
+![24.08.26](files/Projeto_robô_sumo_24_08_26.pdf)
 
-### 🔧 Estrutura do robô
-![Chassi]()
-
-### ⚙️ Arquitetura do sistema
-![Sistema]()
+### ⚙️ Código INO
+![Código](src/robosumo1.0.ino)
 
 ### 🔌 Circuito eletrônico
-![Circuito]()
+![Circuito](pcb_&_eletronics_files/Sheet_sumô.pdf)
 
 ---
 
