@@ -1,7 +1,7 @@
 #include <Bluepad32.h>
 
 // ==========================
-// PINAGEM (igual a sua)
+// PINAGEM
 // ==========================
 #define AIN1 19
 #define AIN2 18
@@ -27,7 +27,7 @@ ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 // ==========================
 void setMotor(int motorA, int motorB) {
 
-  // ===== Motor A =====
+  // Motor A
   if (motorA > 0) {
     digitalWrite(AIN1, HIGH);
     digitalWrite(AIN2, LOW);
@@ -39,7 +39,7 @@ void setMotor(int motorA, int motorB) {
     digitalWrite(AIN2, LOW);
   }
 
-  // ===== Motor B =====
+  // Motor B
   if (motorB > 0) {
     digitalWrite(BIN1, HIGH);
     digitalWrite(BIN2, LOW);
@@ -55,8 +55,8 @@ void setMotor(int motorA, int motorB) {
   ledcWrite(canalB, abs(motorB));
 
   // Debug
-  Serial.print("A: "); Serial.print(motorA);
-  Serial.print(" | B: "); Serial.println(motorB);
+  Serial.print("MotorA: "); Serial.print(motorA);
+  Serial.print(" | MotorB: "); Serial.println(motorB);
 }
 
 // ==========================
@@ -65,16 +65,25 @@ void setMotor(int motorA, int motorB) {
 void processGamepad(ControllerPtr ctl) {
 
   int baseSpeed = 0;
-int x = ctl->axisX();
-
-// DEADZONE
-int deadzone = 50;
-if (abs(x) < deadzone) {
-  x = 0;
-}
+  int x = ctl->axisX();
 
   // ==========================
-  // ACELERAÇÃO (gatilhos)
+  // DEADZONE
+  // ==========================
+  int deadzone = 80;
+
+  if (abs(x) < deadzone) {
+    x = 0;
+  } else {
+    if (x > 0) {
+      x = map(x, deadzone, 512, 0, 512);
+    } else {
+      x = map(x, -deadzone, -512, 0, -512);
+    }
+  }
+
+  // ==========================
+  // ACELERAÇÃO
   // ==========================
   if (ctl->throttle() > 100) {  // R2
     baseSpeed = 255;
@@ -90,23 +99,36 @@ if (abs(x) < deadzone) {
   }
 
   // ==========================
-  // CURVA COM ANALÓGICO
+  // CURVA
   // ==========================
   int curva = map(x, -512, 512, -150, 150);
 
-  int motorA = baseSpeed;
-  int motorB = baseSpeed;
+  int motorA, motorB;
 
-  // reduz um lado pra curvar
-  motorA = baseSpeed - curva;
-  motorB = baseSpeed + curva;
+  if (baseSpeed > 0) {
+    // FRENTE
+    motorA = baseSpeed - curva;
+    motorB = baseSpeed + curva;
+  } else {
+    // TRÁS (corrigido)
+    motorA = baseSpeed + curva;
+    motorB = baseSpeed - curva;
+  }
 
-  // limita
+  // Limite
   motorA = constrain(motorA, -255, 255);
   motorB = constrain(motorB, -255, 255);
 
+  // Evita motor "morto" sem querer
+  if (motorA == 0) motorA = baseSpeed > 0 ? 80 : -80;
+  if (motorB == 0) motorB = baseSpeed > 0 ? 80 : -80;
+
+  // Debug
   Serial.print("X: "); Serial.print(x);
-  Serial.print(" | Curva: "); Serial.println(curva);
+  Serial.print(" | Curva: "); Serial.print(curva);
+  Serial.print(" | Base: "); Serial.print(baseSpeed);
+  Serial.print(" | A: "); Serial.print(motorA);
+  Serial.print(" | B: "); Serial.println(motorB);
 
   setMotor(motorA, motorB);
 }
@@ -169,5 +191,5 @@ void loop() {
     }
   }
 
-  delay(50);
+  delay(30);
 }
